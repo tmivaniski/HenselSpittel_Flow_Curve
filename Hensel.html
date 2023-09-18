@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+</head>
+<body>
+
+<!-- Estrutura principal -->
+<div style="text-align: center;">
+    <h1>Equação de Hensel-Spittel by Dr. Eng. Thiago M. Ivaniski</h1>
+    <div class="math-equation">
+        \( \sigma = A \cdot e^{m1 \cdot T} \cdot \epsilon^{m2} \cdot \dot{\epsilon}^{m3} \cdot e^{m4 / \epsilon} \cdot (1 + \epsilon)^{m5 \cdot T} \cdot e^{m7 - \epsilon} \cdot \dot{\epsilon}^{m8 \cdot T} \cdot T^{m9} \)
+    </div>
+    
+    
+</div>
+
+<!-- Barras do modelo de Hensel-Spittel -->
+<div id="controls-container">
+    <!-- Primeira barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>strain_rate (1/s)</i></p>
+        <div id="d1"> 
+            <span id="initialSliderValue1">0.001</span>&nbsp;
+            <input type="number" id="input1" min="0" max="1" value="0.001" onchange="updateGraph()" oninput="updateSlider('slid1', this.value)">
+        </div>
+        <div id="slider1">
+            <input type="range" id="slid1" orient="vertical" min="0" max="1" value="0.001" step="0.001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue1', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+  
+    <!-- Terceira barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>T (°C)</i></p>
+        <div id="d2"> 
+            <span id="initialSliderValue2">850</span>&nbsp;
+            <input type="number" id="input2" min="850" max="1200" value="1000" onchange="updateGraph()" oninput="updateSlider('slid2', this.value)">
+        </div>
+        <div id="slider2">
+            <input type="range" id="slid2" orient="vertical" min="850" max="1200" value="1000" step="5" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue2', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Quarta barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>A</i></p>
+        <div id="d3"> 
+            <span id="initialSliderValue3">200</span>&nbsp;
+            <input type="number" id="input3" min="0" max="1000" value="200" onchange="updateGraph()" oninput="updateSlider('slid3', this.value)">
+        </div>
+        <div id="slider3">
+            <input type="range" id="slid3" orient="vertical" min="0" max="1000" value="200" step="10" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue3', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Quinta barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m1</i></p>
+        <div id="d4"> 
+            <span id="initialSliderValue4">-0.0005</span>&nbsp;
+            <input type="number" id="input4" min="-1" max="1" value="-0.0005" onchange="updateGraph()" oninput="updateSlider('slid4', this.value)">
+        </div>
+        <div id="slider4">
+            <input type="range" id="slid4" orient="vertical" min="-1" max="1" value="0" step="0.0001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue4', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Sexta barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m2</i></p>
+        <div id="d5"> 
+            <span id="initialSliderValue5">0</span>&nbsp;
+            <input type="number" id="input5" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid5', this.value)">
+        </div>
+        <div id="slider5">
+            <input type="range" id="slid5" orient="vertical" min="-1" max="1" value="0" step="0.0001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue5', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+     <!-- Sétima barra -->
+     <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m3</i></p>
+        <div id="d6"> 
+            <span id="initialSliderValue6">0</span>&nbsp;
+            <input type="number" id="input6" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid6', this.value)">
+        </div>
+        <div id="slider6">
+            <input type="range" id="slid6" orient="vertical" min="-1" max="1" value="0" step="0.00001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue6', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Oitava barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m4</i></p>
+        <div id="d7"> 
+            <span id="initialSliderValue7">0</span>&nbsp;
+            <input type="number" id="input7" min="0" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid7', this.value)">
+        </div>
+        <div id="slider7">
+            <input type="range" id="slid7" orient="vertical" min="-1" max="1" value="0" step="0.0001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue7', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Nova barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m5</i></p>
+        <div id="d8"> 
+            <span id="initialSliderValue8">0</span>&nbsp;
+            <input type="number" id="input8" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid8', this.value)">
+        </div>
+        <div id="slider9">
+            <input type="range" id="slid8" orient="vertical" min="-0.1" max="0.1" value="0" step="0.00001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue8', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+     <!-- Décima barra -->
+     <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m6</i></p>
+        <div id="d9"> 
+            <span id="initialSliderValue9">0</span>&nbsp;
+            <input type="number" id="input9" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid9', this.value)">
+        </div>
+        <div id="slider9">
+            <input type="range" id="slid9" orient="vertical" min="-1" max="1" value="0" step="0.001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue9', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Décima primeira barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m7</i></p>
+        <div id="d10"> 
+            <span id="initialSliderValue10">0</span>&nbsp;
+            <input type="number" id="input10" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid10', this.value)">
+        </div>
+        <div id="slider10">
+            <input type="range" id="slid10" orient="vertical" min="-1" max="1" value="0" step="0.001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue10', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Décima segunda barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m8</i></p>
+        <div id="d11"> 
+            <span id="initialSliderValue11">0</span>&nbsp;
+            <input type="number" id="input11" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid11', this.value)">
+        </div>
+        <div id="slider11">
+            <input type="range" id="slid11" orient="vertical" min="-1" max="1" value="0" step="0.001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue11', 'line_hensel_spittel')">
+        </div>
+    </div>
+
+    <!-- Décima terceira barra -->
+    <div style="display: flex; flex-direction: column; align-items: center; margin-right: 30px;">
+        <p><i>m9</i></p>
+        <div id="d12"> 
+            <span id="initialSliderValue12">0</span>&nbsp;
+            <input type="number" id="input12" min="-1" max="1" value="0" onchange="updateGraph()" oninput="updateSlider('slid12', this.value)">
+        </div>
+        <div id="slider12">
+            <input type="range" id="slid12" orient="vertical" min="-1" max="1" value="0" step="0.001" onchange="updateGraph()" oninput="displayVal(this.value, 'initialSliderValue12', 'line_hensel_spittel')">
+        </div>
+    </div>
+</div>
+
+<!-- Gráfico SVG -->
+<div id="graph-container">
+    <svg id="graph" width="400" height="400">
+        
+        <!-- Retângulo de Visualização -->
+        <rect x="40" y="40" width="320" height="320" stroke="#ccc" fill="none" />
+        
+        <!-- Eixo X (Deformação Verdadeira) -->
+        <text x="200" y="390" text-anchor="middle">Deformação Verdadeira</text>
+
+        <!-- Eixo Y (Tensão em MPa) -->
+        <text x="10" y="200" text-anchor="middle" transform="rotate(-90, 10, 200)">Tensão (MPa)</text>
+
+        <!-- Eixo X -->
+        <line x1="10" y1="360" x2="360" y2="360" style="stroke:#000; stroke-width:2" />
+
+        <!-- Eixo Y -->
+        <line x1="40" y1="40" x2="40" y2="360" style="stroke:#000; stroke-width:2" />
+
+        <!-- Linha da equação de Hensel-Spittel -->
+        <polyline id="line_hensel_spittel" style="fill:none; stroke:#00f; stroke-width:2.5"></polyline>
+    </svg>
+</div> 
+<div id="graph-info"></div> <!-- Esta é a div para o texto informativo -->
+
+<script src="script.js"></script>
+
+</body>
+</html>

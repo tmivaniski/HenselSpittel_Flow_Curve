@@ -1,0 +1,40 @@
+/* Estilo para organizar os controles no canto esquerdo superior */
+#controls-container {
+    position: absolute;
+    top: 600px;
+    left: 000px;
+    display: flex;
+    flex-direction: line;
+}
+
+/* Estilo para mover o gráfico para o centro da página */
+#graph-container {
+    position: center;
+    text-align: center;
+}
+
+/* Estilo para centralizar o gráfico na vertical */
+#graph {
+    margin: 0 auto;
+    position: center;
+}
+
+/* Adicione outros estilos CSS relevantes aqui */
+
+.math-equation {
+    font-size: 18px; /* Ajuste o tamanho da fonte desejado aqui */
+    margin: -10 right;
+}
+
+
+#graph-info {
+    text-align: center;
+    font-size: 18px; /* Ajuste o tamanho da fonte conforme desejado */
+    margin-top: 20px;
+  }
+  
+#graph-info {
+    text-align: center;
+    font-size: 16px; /* Ajuste o tamanho da fonte conforme desejado */
+    margin-top: 20px;
+  }  
